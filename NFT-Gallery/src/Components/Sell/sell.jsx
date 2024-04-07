@@ -86,7 +86,7 @@ export default function Sell()
                 }
                 });
                 // console.log( NFTContract.signer);
-                console.log( await NFTContract.AddNFT( res.data.IpfsHash, { gasLimit: ethers.BigNumber.from("4000000"), gasPrice: ethers.utils.parseUnits("40", "gwei")} ) );
+                console.log( await NFTContract.AddNFTs( res.data.IpfsHash, { gasLimit: ethers.BigNumber.from("4000000"), gasPrice: ethers.utils.parseUnits("40", "gwei")} ) );
 
             }
             catch(error)

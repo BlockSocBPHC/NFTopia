@@ -4,7 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import contractABI from "../../contractABI.json"
 import context from "../../Context/context";
 
-const contractAddress = "0x19F25e8b77477a94938746489F386B70c68b27a8";
+const contractAddress = "0x6B4CC2D22D8C817618fF77F69610A42EcC32E619";
 
 export default function Home() {
 
@@ -89,13 +89,16 @@ export default function Home() {
         if ( NFTContract.signer._address !== null )
         {
           console.log("GETTING>>>>>>>")
-          const uris = await NFTContract.GetAvailableNFTs();
+          const tokens = await NFTContract.GetAvailableNFTs();
           const _data = [];
-          for (const uri of uris) {
-            const imgSrc = await getImageSrc("https://gateway.pinata.cloud/ipfs/" + uri);
+          for (const token of tokens) {
+            // console.log(token)
+            const imgSrc = await getImageSrc("https://gateway.pinata.cloud/ipfs/" + token.uri);
             _data.push({
               url: imgSrc,
-              param: "ipfs://" + uri
+              token_id: token.id,
+              collection_id: 1,         /////////////////////////////////////////////
+              param: "ipfs://" + token.uri
             });
           }
           console.log( _data[0])
@@ -130,11 +133,11 @@ export default function Home() {
     );
   }
 
-  async function handleMint(tokenURI) {
+  async function handleMint(collection_id, token_id) {
     setIsMinting(true);
     try {
       const options = { value: ethers.utils.parseEther("0.01") };
-      const response = await NFTContract.mintNFT(tokenURI, options);
+      const response = await NFTContract.mintNFT(collection_id, token_id, options);
       console.log("Received: ", response);
     } catch (err) {
       alert(err);
@@ -187,7 +190,7 @@ export default function Home() {
               className="px-2 py-1 rounded-md bg-orange-700 text-white hover:bg-slate-800"
               disabled = {isMinting}
               onClick={() => {
-                handleMint(item.param);
+                handleMint(item.collection_id, item.token_id);
               }}
             >
               Mint - 0.01 MATIC
