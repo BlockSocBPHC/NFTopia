@@ -8,7 +8,8 @@ const contractAddress = "0x6B4CC2D22D8C817618fF77F69610A42EcC32E619";
 
 export default function Home() {
 
-  const {NFTContract,setNFTContract} = useContext(context);
+  const [NFTContract,setNFTContract] = useContext(context).contract;
+  console.log(useContext(context));
   
   const [account, setAccount] = useState(null);
   const [ data, setData ] = useState([]);
