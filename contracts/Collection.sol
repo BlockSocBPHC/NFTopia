@@ -21,12 +21,6 @@ contract Collection is ERC721URIStorage, Ownable {
     uint256 private nextTokenID = 0;
     uint256 private totalMinted = 0;
     uint256 public PRICE_PER_TOKEN = 0.01 ether;
-
-    // uint256 public LIMIT_PER_ADDRESS = 5;
-    // uint256 public MAX_SUPPLY  = 5;
-
-    
-    // mapping( address => Token[] ) private tokensByOwner;
     Token[] private allTokens;
 
     constructor( uint256 newId, address _artist) ERC721("Collection", "NFT") Ownable(msg.sender) 
@@ -35,24 +29,10 @@ contract Collection is ERC721URIStorage, Ownable {
         artist = _artist;
     }
 
-    // function setPrice(uint256 price) external onlyOwner{
-    //     PRICE_PER_TOKEN = price;
-    // }
-
-    // function setLimit(uint256 limit) external onlyOwner{
-    //     LIMIT_PER_ADDRESS = limit;
-    // }
-
-    // function setMaxSupply(uint256 max_supply) external onlyOwner{
-    //     MAX_SUPPLY = max_supply;
-    // }
-
     function AddToken( string memory _tokenURI ) external returns( uint )
     {
         Token memory temp = Token(nextTokenID, id, _tokenURI, new string[](0)  );
         allTokens.push(temp);
-        Token storage newToken = allTokens[allTokens.length - 1];
-        // tokensByOwner[address(0)].push(newToken); 
         return( nextTokenID++ );
     }
 
@@ -65,15 +45,6 @@ contract Collection is ERC721URIStorage, Ownable {
         }
         return Token(0, 0, "", new string[](0));
     }
-
-    // function GetTokensByOwner(address owner) external view returns(Token[] memory)
-    // {
-    //     Token[] memory tokensByOwner = [];
-    //     for( uint i = 0; i < allTokens.length; i++ ) 
-    //     {
-    //         if( )
-    //     }
-    // }
 
     function AddVote( uint tokenID, string memory voterName ) external
     {
@@ -95,7 +66,7 @@ contract Collection is ERC721URIStorage, Ownable {
                 {
                     if( ( keccak256(abi.encode(allTokens[i].voters[j])) == keccak256(abi.encode(voterName)) ) && flag == 0 )
                     {
-                        allTokens[i].voters = remove(j, allTokens[i].voters);
+                        allTokens[i].voters = remove(j , allTokens[i].voters);
                         flag = 1;
                     }
                 }
@@ -127,13 +98,6 @@ contract Collection is ERC721URIStorage, Ownable {
         returns (uint256)
     {
         require(PRICE_PER_TOKEN <= msg.value, "Ether paid is incorrect");
-        // require( tokensByOwner[owner].length < LIMIT_PER_ADDRESS, "You have exceeded the minting limit for this account");
-        // require(totalMinted + 1 <= MAX_SUPPLY, "You have exceeded Max Supply");
-        // require(URIMapping[tokenURI] == 0, "This NFT has already been minted");
-        // URIMapping[tokenURI] += 1;
-        // mintedAddress[msg.sender] += 1;
-
-        // uint256 newItemId = _tokenIds;
         Token memory token = FindTokenWithID(tokenID);
         _mint(owner, token.id);
         _setTokenURI(token.id, token.uri);
@@ -141,11 +105,6 @@ contract Collection is ERC721URIStorage, Ownable {
         totalMinted++;
         return token.id;
     }
-
-    // function withdrawMoney() external onlyOwner{
-    //     address payable to = payable(msg.sender);
-    //     to.transfer(address(this).balance);
-    // }
 
     function GetAvailableNFTs() external view returns ( Token[] memory )
     {
@@ -156,15 +115,6 @@ contract Collection is ERC721URIStorage, Ownable {
     {
         return allTokens;
     }
-
-
-    // function UpdateMetadata( ) external 
-    // {
-    //     console.log( tokenURI(0) );
-    //     string memory a = "QmVeyj7AhHdH6ewWNAcKPt6gToT7szENJhHujSBq8Y9bcW";
-    //     _setTokenURI( 0, a );
-    //     console.log( tokenURI(0) );
-    // }
 }
 
 contract Gallery is Ownable
@@ -191,43 +141,15 @@ contract Gallery is Ownable
         {
             if( voters[i].voterAddress == msg.sender )
             {
-                voters[i] = voter;
-                collections[collectionId].DeleteVote(tokenId,voterName);
+                collections[voters[i].collectionId].DeleteVote(tokenId,voters[i].name);
                 collections[collectionId].AddVote(tokenId, voterName);
+                voters[i] = voter;
                 return;
             }
         }
         collections[collectionId].AddVote(tokenId, voterName);
         voters.push(voter);
-        // collections[collectionId].AddVote(tokenId, voterName);
-        // votes[collectionId][tokenId].push(voterName);
     }
-
-    // function ChangeVote( uint prevCollectionId, uint newCollectionId, uint prevTokenId, uint newTokenId, string memory voterName ) external
-    // {
-    //     collections[prevCollectionId].DeleteVote(prevTokenId, voterName);
-    //     collections[newCollectionId].AddVote(newTokenId, voterName);
-    // }
-
-    // function GetNFTsByOwner( address owner) external view returns( Token[] memory)
-    // {
-    //     uint totalLength = 0;
-    //     for (uint i = 0; i < collections.length; i++) {
-    //         totalLength += collections[i].GetTokensByOwner(owner).length;
-    //     }
-
-    //     Token[] memory nfts = new Token[](totalLength);
-    //     uint currentIndex = 0;
-        
-    //     for (uint i = 0; i < collections.length; i++) {
-    //         Token[] memory uris = collections[i].GetTokensByOwner(owner);
-    //         for (uint j = 0; j < uris.length; j++) {
-    //             nfts[currentIndex] = uris[j];
-    //             currentIndex++;
-    //         }
-    //     }
-    //     return nfts;
-    // }
 
     function GetAllNFTs( address seller ) external view returns( Token[] memory )
     {
@@ -255,17 +177,13 @@ contract Gallery is Ownable
         return nfts;
     }
 
-    function AddNFTs( string memory _collectionURIs ) external returns ( uint )       //Add functionaity for multiple images in a single upload
+    function AddNFTs( string memory _collectionURIs ) external returns ( uint ) 
     {
         Collection newCollection = new Collection(currentCollectionId, msg.sender );
         collections.push(newCollection);
-        // for ( uint i = 0; i < _collectionURIs.length; i++)
-        // {
-        // tok_collectionMap[_collectionURIs] = currentCollectionId;            ////////////////////////////
         newCollection.AddToken(_collectionURIs);
         newCollection.transferOwnership(owner());
-        // }
-        currentCollectionId++; /////////////////////////////////
+        currentCollectionId++;
         return collections.length;
 
     }
@@ -290,7 +208,7 @@ contract Gallery is Ownable
         return nfts;
     }
 
-    function mintNFT( uint collectionID, uint tokenID) external payable           // Change to collectionID and tokenID format
+    function mintNFT( uint collectionID, uint tokenID) external payable 
     {
         collections[collectionID].mintNFT{value:msg.value}(tokenID, msg.sender);
     }
