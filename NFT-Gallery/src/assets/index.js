@@ -79,6 +79,7 @@ import displayArrow from "./DisplayArrow.svg"
 import plus from "./plus.svg"
 import NFTopia from "./NFTopia.svg"
 import cross from "./cross.svg"
+import NFTopiaIcon from "./NFTopiaIcon.svg"
 
 export {
   brainwave,
@@ -154,4 +155,5 @@ export {
   plus,
   NFTopia,
   cross,
+  NFTopiaIcon,
 };

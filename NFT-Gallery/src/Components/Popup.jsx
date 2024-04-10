@@ -33,7 +33,8 @@ const Popup = ({
   
 
   return (
-    <div ref={popupRef} className={`${isOpen ? "" : "hidden"} fixed bottom-[50vh] left-[50vw] -translate-x-[50%] translate-y-[50%] z-10 bg-n-6/80 w-[30vw] backdrop-blur-sm p-8 flex flex-cols`}>
+    <div ref={popupRef} className={`${isOpen ? "" : "hidden"} fixed bottom-[50vh] left-[50vw] -translate-x-[50%] translate-y-[50%] z-10 bg-gradient-to-tr from-purple-900 to-yellow-600 opacity-90 w-[30vw] backdrop-blur-sm p-1 rounded-2xl`}>
+      <div className='relative bg-n-6/90 flex rounded-2xl p-8'>
             {/* <div className=''>
                 <h4 className='h4'>Hello I am A popup</h4>
             </div> */}
@@ -51,6 +52,8 @@ const Popup = ({
                 </div>
                 
             </div>
+
+      </div>
         </div>
   )
 }

@@ -15,6 +15,7 @@ const Sell = () => {
     const [file, setFile] = useState();
     const [fileName, setFileName] = useState("");
     const [ collectionName, setCollectionName ] = useState();
+    const [username, setUsername] = useContext(context).username;
     const inputRef = useRef();
 
     function handleChange(e) {
@@ -61,11 +62,12 @@ const Sell = () => {
             const meta_formData = new FormData();
             const metadata = {
                 pinataContent: {
-                    name: collectionName + "_Metadata",
+                    name: collectionName,
                     image: "ipfs://" + res.data.IpfsHash,
                     description: "This is a test dynamic NFT implementation",
+                    artist: username,
                 },
-                pinataMetadata: { name: "TEST.json"}
+                pinataMetadata: { name: `${collectionName}.json`}
             }
             
             const jsonData = JSON.stringify(metadata)
@@ -106,18 +108,18 @@ const Sell = () => {
   return (
     <div className='container mt-[10rem] relative'>
       <h1 className='h1'> List Your NFTs</h1>
-        <div className='px-4 py-4 bg-opacity-50'>
-        <div className='py-3 flex flex-col leading-relaxed mt-4'>
+        <div className='px-4 py-2 bg-opacity-50'>
+            <div className='py-3 flex flex-col leading-relaxed m-1'>
                 <h5 className='h5'>Collection Name :</h5>
                 <input type="text" onChange={ (e) => setCollectionName(e.target.value) } className = "border-n-4/40 border-2 hover:border-n-4/70 focus:outline-none focus:border-n-4/100 bg-inherit rounded-[0.8rem] px-4 py-1 shadow-md max-w-[20rem] h7" placeholder='Enter Collection Name' /> <br />
             </div>
-            <div className='py-3 flex flex-col leading-relaxed my-4'>
+            <div className='py-3 flex flex-col leading-relaxed m-1'>
                 <h5 className='h5'>Artist's Name :</h5>
-                <input type="text" onChange={ (e) => setCollectionName(e.target.value) } className = "border-n-4/40 border-2 hover:border-n-4/70 focus:outline-none focus:border-n-4/100 bg-inherit rounded-[0.8rem] px-4 py-1 shadow-md max-w-[20rem] h7" placeholder="Enter the artist's name" /> <br />
+                <input type="text" value={username} className = "border-n-4/40 border-2 hover:border-n-4/70 focus:outline-none focus:border-n-4/100 bg-inherit rounded-[0.8rem] px-4 py-1 shadow-md max-w-[20rem] h7" disabled />
             </div>
             <input type="file" ref={inputRef} hidden  onChange={handleChange} />
 
-            <div className=' border border-n-4/40 hover:border-n-4/80 rounded-[1rem] px-15 py-15 flex space-x-4 items-center hover:cursor-pointer'  onClick={() => inputRef.current.click()} >
+            <div className='my-4 border border-n-4/40 hover:border-n-4/80 rounded-[1rem] px-15 py-15 flex space-x-4 items-center hover:cursor-pointer'  onClick={() => inputRef.current.click()} >
                 <div className='items-center border p-8 border-n-4/40 hover:border-n-4/80 rounded-[1rem]'>
                     <img src={file || plus} className={file ? `scale-[320%] rounded-[0.2rem]`: ""} width={30} />
                 </div>
@@ -129,7 +131,7 @@ const Sell = () => {
 
             <img hidden className='px-4 py-4 place-self-center' 
             src={file} height={300} width={300} />
-            <button onClick={submitNFT} className='bg-orange-400 border-black my-8 rounded-md px-4 py-1'> 
+            <button onClick={submitNFT} className='bg-orange-400 border-black my-4 rounded-md px-4 py-1'> 
                 Submit
             </button>
         </div>

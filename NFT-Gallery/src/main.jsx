@@ -6,12 +6,16 @@ import Sell from './Pages/Sell.jsx'
 import Home from './Pages/Home.jsx'
 import Layout from './Layout.jsx'
 import ContextProvider from './Context/ContextProvider.jsx'
+import MyNfts from './Pages/MyNfts.jsx'
+import PreviousListings from './Pages/PreviousListings.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path = "/" element = {<Layout />}>
       <Route path = "" element = {<Home />} />
       <Route path = "list_nfts" element = {<Sell />} />
+      {/* <Route path = "my_nfts" element = {<MyNfts />} /> */}
+      <Route path = "previous_listings" element = {<PreviousListings />} />
     </Route>
   )
 )

@@ -13,7 +13,7 @@ const Header = () => {
     const signInRef = useRef(null);
     const pathname = useLocation();
     const [openNavigation, setOpenNavigation] = useState(false);
-    const [isNewAccountOpen,setIsNewAccountOpen] = useContext(context).newAccount;
+    // const [isNewAccountOpen,setIsNewAccountOpen] = useContext(context).newAccount;
     const [isSignInOpen,setIsSignInOpen] = useContext(context).signIn;
     const[isWalletConnected,setIsWalletConnected] = useContext(context).walletConnect;
     const [account,setAccount] = useContext(context).account;
@@ -69,13 +69,6 @@ const Header = () => {
 
             </nav>
 
-            {
-                !isWalletConnected && 
-                <a onClick = {() => setIsNewAccountOpen({id:'newAccountPopup',open:true})} className = 'button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block cursor-pointer'>
-                    New Account
-                </a>
-
-            }
             {   
                 !isWalletConnected ?
                 <Button className = "hidden lg:flex" ref={signInRef} onClick = {() => setIsSignInOpen({id:'signInPopup',open:true}) } >

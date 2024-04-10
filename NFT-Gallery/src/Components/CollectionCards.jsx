@@ -9,8 +9,8 @@ import { ScrollParallax } from "react-just-parallax"
 const CollectionCards = ({
     onClick,
     CollectionName,
-    Floor,
-    Volume,
+    votes,
+    artist,
     img,
     className,
 }) => {
@@ -29,15 +29,15 @@ const CollectionCards = ({
                             </div>
                             <div className='h7 leading-relaxed px-8 pb-2 flex justify-between '>
                                 <div className='text-center'>
-                                    <h7> FLOOR </h7> <br/>
-                                    <h7> {Floor || "0ETH"} </h7>
+                                    <h7> ARTIST </h7> <br/>
+                                    <h7> {artist || "-"} </h7>
                                 </div>
                                 
                                 <div className='mt-[0.4rem] w-[0.125rem] bg-n-4/60 rounded-md'/>
 
                                 <div className='text-center'>
-                                <h7> VOLUME </h7> <br/>
-                                <h7> {Volume || "0ETH"} </h7>
+                                <h7> VOTES </h7> <br/>
+                                <h7> {votes || "0"} </h7>
                                 </div>
                             </div>
                         </div>

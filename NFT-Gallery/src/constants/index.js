@@ -45,12 +45,7 @@ import {
     {
       id: "1",
       title: "Previous Listings",
-      url: "#previous_listings",
-    },
-    {
-      id: "2",
-      title: "My NFTs",
-      url: "#my_nfts",
+      url: "/previous_listings",
     },
     {
       id: "3",
