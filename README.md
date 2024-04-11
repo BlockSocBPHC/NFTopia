@@ -34,9 +34,11 @@ This project utilizes smart contracts, along with the following technologies:
    - #### Additional Libraries:
       - Mouse Parallax (for engaging visual effects)
       - React Spinners (for loading animations)
+   - Backend (SmartContract based):
+     - Solidity
+     - Pinata IPFS storage
         
    - Styling: Tailwind CSS
-   - Backend (SmartContract based): Solidity
    - Blockchain Platform (Testnet): Polygon Mumbai
 
 ## Getting Started
