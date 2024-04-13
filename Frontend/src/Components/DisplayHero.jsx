@@ -13,8 +13,7 @@ const DisplayHero = () => {
     const parallaxRef = useRef(null);
 
     let navigate = useNavigate(); 
-    const routeChange = () =>{ 
-      let path = `/list_nfts`; 
+    const routeChange = (path) =>{
       navigate(path);
     }
     
@@ -33,10 +32,10 @@ const DisplayHero = () => {
                 <p className='body-1 px-4 text-xl leading-relaxed text-n-3/80'>
                     Explore new avenues of revenue by putting up your NFTs for sale.</p>
                 <div className=" text-center space-x-10">
-                <Button white onClick = {() => setIsSignInOpen({id:'signInPopup',open:true}) } >
-                        Start Buying
+                <Button white onClick = {() => {!account ? setIsSignInOpen({id:'signInPopup',open:true}) : window.location.hash = '#Collections List'  } } >
+                        View Collections
                     </Button>
-                    <Button onClick = {() => {!account ? setIsSignInOpen({id:'signInPopup',open:true}) : routeChange() }} >
+                    <Button onClick = {() => {!account ? setIsSignInOpen({id:'signInPopup',open:true}) : routeChange(`list_nfts`) }} >
                         Start Selling
                     </Button>
                 </div>

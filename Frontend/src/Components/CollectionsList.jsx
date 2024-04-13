@@ -20,7 +20,7 @@ const CollectionsList = () => {
         <div className='relative pb-[4rem]'>
             <h2 className='h2'>Recently Listed Collections:</h2>
         </div>
-        <div className='relative flex space-x-[3rem] overflow-x-scroll  '>
+        <div id = "Collections List" className='relative flex space-x-[3rem] overflow-x-scroll  '>
             {data.map((item, index) => (
                 <CollectionCards 
                   key = {item.collection_id}
