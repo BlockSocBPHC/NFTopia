@@ -111,7 +111,7 @@ export const BgRings = ({ parallaxRef }) => {
   }, []);
 
   return (
-    <div className="absolute -top-[42.375rem] left-1/2 w-[78rem] aspect-square -translate-x-1/2 md:-top-[38.5rem] xl:-top-[32rem]">
+    <div className="absolute -top-[16.5rem] lg:-top-[42.375rem] left-[1rem] lg:left-1/2 lg:w-[78rem] aspect-square lg:-translate-x-1/2 md:-top-[38.5rem] xl:-top-[32rem] scale-50 lg:scale-100">
       <div className="absolute scale-[80%] top-[40rem] left-[14rem]">
       <MouseParallax strength={-0.02} parallaxContainerRef={parallaxRef}>
         <Rings />
