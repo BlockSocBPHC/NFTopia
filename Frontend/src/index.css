@@ -22,6 +22,16 @@
   }
 }
 
+@layer utilities {
+  .no-scrollbar {
+      -ms-overflow-style: none; 
+      scrollbar-width: none;
+}
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+}
+
 .rotate-45 {
   @apply rotate-[45deg];
 }

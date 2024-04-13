@@ -125,8 +125,8 @@ function Layout()
         <Popup id='signInPopup' isOpen= {isSignInOpen} setIsOpen={setIsSignInOpen} >
             <h1 className="h4">Signin</h1>
             <img src={curve} width={150}className='relative -top-[0.75rem] self-center '/>
-            <h5 className='h6'>Username :</h5>
-            <input type="text" onChange={ (e) => setUsername(e.target.value) } value = {username} className = "border-n-4/40 border-2 hover:border-n-4/70 focus:outline-none focus:border-n-4/100 bg-inherit rounded-[0.8rem] px-4 py-1 shadow-md max-w-[20rem] h-[2.5rem] h7" placeholder='Enter username'/> <br />
+            <h5 className='h5'>Username :</h5>
+            <input type="text" onChange={ (e) => setUsername(e.target.value) } value = {username} className = "h6 border-n-4/40 border-2 hover:border-n-4/70 focus:outline-none focus:border-n-4/100 bg-inherit rounded-[0.8rem] px-4 py-1 shadow-md max-w-[20rem] h-[2.5rem]" placeholder='Enter username'/> <br />
             <Button onClick={handleSignInClick}>Connect Metamask</Button>
         </Popup>
         <ButtonGradient />

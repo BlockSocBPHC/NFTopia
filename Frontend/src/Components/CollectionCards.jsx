@@ -15,7 +15,7 @@ const CollectionCards = ({
                 <div className='relative z-1 p-0.5 rounded-2xl bg-conic-gradient'>
                     <div className='relative bg-n-8 rounded-[1rem]'>
 
-                        <div className='aspect-[100/130] rounded-b-[0.9rem] overflow-scroll flex flex-col'>
+                        <div className='aspect-[100/130] rounded-b-[0.9rem] overflow-hidden flex flex-col'>
                             <div className='aspect-square scale-[80%] overflow-hidden rounded-[2rem] flex'>
                                 <img src={img || robot} className='' width={1024} height={490} alt = "AI"/>
                             </div>

@@ -20,7 +20,7 @@ export async function extractData( tokens )
                 param: "ipfs://" + token.uri,
                 voters: token.voters,
             });
-            {console.log(tokens[0].voters)}
+            // {console.log(tokens[0].voters)}
         }
         console.log( _data[0])
         return _data;

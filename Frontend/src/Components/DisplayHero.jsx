@@ -36,16 +36,16 @@ const DisplayHero = () => {
                         View Collections
                     </Button>
                     <Button onClick = {() => {!account ? setIsSignInOpen({id:'signInPopup',open:true}) : routeChange(`list_nfts`) }} >
-                        Start Selling
+                        List Your NFT
                     </Button>
                 </div>
                 <div className='flex space-x-4 items-center'>
                     <img src={displayArrow} width={30} />
-                    <span className='body-2'>Developed by blocksoc</span>
+                    <span className='body-2'>Unlock Creativity: Your NFT Journey Begins Here</span>
                 </div>
                 <div className='flex space-x-4 items-center'>
                     <img src={displayArrow} width={30} />
-                    <span className='body-2'>Developed by blocksoc</span>
+                    <span className='body-2'>NFTopia: Demystify NFTs</span>
                 </div>
                 <div className='flex space-x-4 items-center'>
                     <img src={displayArrow} width={30} />
