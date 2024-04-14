@@ -103,9 +103,6 @@ function Layout()
         {(collectionCardPopupData.voters && collectionCardPopupData.voters.length > 0) ?
             <div className='text-center'>
                 <h5 className='h5'> Voters: {collectionCardPopupData.voters.length} </h5>
-                {collectionCardPopupData.voters.map((voter, index) => (
-                    <li className='h6' key={index}>{voter}</li>
-                ))}
             </div>
 
             :
