@@ -109,11 +109,11 @@ const Sell = () => {
         <div className='px-4 py-2 bg-opacity-50'>
             <div className='py-3 flex flex-col leading-relaxed m-1'>
                 <h5 className='h5'>Collection Name :</h5>
-                <input type="text" onChange={ (e) => setCollectionName(e.target.value) } className = "border-n-4/40 border-2 hover:border-n-4/70 focus:outline-none focus:border-n-4/100 bg-inherit rounded-[0.8rem] px-4 py-1 shadow-md max-w-[20rem] h7" placeholder='Enter Collection Name' /> <br />
+                <input type="text" onChange={ (e) => setCollectionName(e.target.value) } className = "border-n-4/40 border-2 hover:border-n-4/70 focus:outline-none focus:border-n-4/100 bg-inherit rounded-[0.8rem] px-4 py-1 shadow-md max-w-[20rem] h6" placeholder='Enter Collection Name' /> <br />
             </div>
             <div className='py-3 flex flex-col leading-relaxed m-1'>
                 <h5 className='h5'>Artist's Name :</h5>
-                <input type="text" value={username} className = "border-n-4/40 border-2 hover:border-n-4/70 focus:outline-none focus:border-n-4/100 bg-inherit rounded-[0.8rem] px-4 py-1 shadow-md max-w-[20rem] h7" disabled />
+                <input type="text" value={username} className = "border-n-4/40 border-2 hover:border-n-4/70 focus:outline-none focus:border-n-4/100 bg-inherit rounded-[0.8rem] px-4 py-1 shadow-md max-w-[20rem] h6" disabled />
             </div>
             <input type="file" ref={inputRef} hidden  onChange={handleChange} />
 

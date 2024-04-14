@@ -1,4 +1,4 @@
-import {React, useContext} from 'react'
+import {React, useContext, useRef, useEffect} from 'react'
 import Section from './Section'
 import CollectionCards from './CollectionCards'
 import context from "../Context/context"
@@ -8,6 +8,8 @@ const CollectionsList = () => {
   const [collectionCardPopupData, setCollectionCardPopupData] = useContext(context).collectionPopup;
   const [isCollectionPopupOpen, setIsCollectionPopupOpen] = useContext(context).collectionPopupOpen;
   const [isCollectionPopupVoteDisabled, setIsCollectionPopupVoteDisabled] = useContext(context).popupVoteDisabled;
+  const scrollRef = useHorizontalScroll();
+
   async function onCollectionCardClicked( data )
   {
     setIsCollectionPopupVoteDisabled(false);
@@ -15,12 +17,45 @@ const CollectionsList = () => {
     setCollectionCardPopupData(data);
   }
 
+  function useHorizontalScroll(sensitivity = 3) {
+    const elRef = useRef();
+  
+    useEffect(() => {
+      const el = elRef.current;
+  
+      if (el) {
+        const onWheel = (e) => {
+          if (e.deltaY === 0) return; // Ignore vertical scrolling
+  
+          e.preventDefault();
+  
+          // Calculate desired scroll position based on sensitivity and deltaY
+          const desiredScrollLeft = el.scrollLeft + sensitivity * e.deltaY;
+  
+          // Use requestAnimationFrame for smooth scrolling
+          requestAnimationFrame(() => {
+            el.scrollTo({
+              left: Math.min(desiredScrollLeft, el.scrollWidth - el.clientWidth), // Prevent overscrolling
+              behavior: 'smooth',
+            });
+          });
+        };
+  
+        el.addEventListener('wheel', onWheel);
+  
+        return () => el.removeEventListener('wheel', onWheel);
+      }
+    }, [sensitivity]); // Re-run useEffect when sensitivity changes
+  
+    return elRef;
+  }
+
   return (
     <Section crosses customPaddings className="pt-[6rem] -mt-[5.25] px-[7rem] mb-[3rem]" >
         <div className='relative pb-[4rem]'>
             <h2 className='h2'>Recently Listed Collections:</h2>
         </div>
-        <div id = "Collections List" className='relative flex space-x-[3rem] overflow-x-scroll  '>
+        <div id = "Collections List" ref={scrollRef} className='relative flex space-x-[3rem] overflow-x-scroll no-scrollbar'>
             {data.map((item, index) => (
                 <CollectionCards 
                   key = {item.collection_id}
